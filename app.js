@@ -49,6 +49,18 @@ function shuffle(a) {
   return a;
 }
 
+function syncQuestionPool() {
+  if (S.mode !== 'full' || !S.order.length) return;
+  const valid = new Set(Q.map(q => q.id));
+  S.order = S.order.filter(id => valid.has(id));
+  const present = new Set(S.order);
+  const missing = shuffle(Q.map(q => q.id).filter(id => !present.has(id)));
+  if (missing.length) {
+    S.order.push(...missing);
+    save();
+  }
+}
+
 function hash32(str) {
   let h = 2166136261 >>> 0;
   for (let i = 0; i < str.length; i++) {
@@ -340,5 +352,6 @@ if (!Q.length) {
   home.classList.remove('hidden');
   home.innerHTML = '<h2>Fragenpool konnte nicht geladen werden.</h2><p>Bitte Seite neu laden. Falls der Fehler bleibt, prüfe die Datendateien.</p>';
 } else {
+  syncQuestionPool();
   homeView();
 }
