@@ -43,6 +43,11 @@ function optionOrder(q){
 }
 
 function storageKey(type){return type===1?'amoc-type1-v1':'amoc-type2-v1'}
+function migrateLegacyType1(){
+  if(localStorage.getItem('amoc-type1-v1')) return;
+  const legacy=localStorage.getItem('amoc-diagnostic-v2');
+  if(legacy) localStorage.setItem('amoc-type1-v1',legacy);
+}
 function reportKey(type){return type===1?'amoc-type1-last-report':'amoc-type2-last-report'}
 
 function loadType(type){
@@ -211,4 +216,5 @@ resetBtn.onclick=()=>{
   if(confirm(`Gespeicherten Fortschritt für Fragentyp ${ACTIVE_TYPE} löschen?`)){localStorage.removeItem(LS);S=freshState();homeView()}
 };
 
+migrateLegacyType1();
 chooserView();
