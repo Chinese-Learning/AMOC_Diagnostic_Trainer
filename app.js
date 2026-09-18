@@ -121,7 +121,7 @@ function homeView(){
     const canResume=S.order.length&&S.i<S.order.length;
     home.innerHTML=`
       <div class="hero"><span class="topic">Fragentyp 3 · 207er Antestat</span><h2>Antestat-Fokustrainer</h2>
-      <p class="muted">Aktive Wiedergabe statt Multiple Choice: erst selbst beantworten, dann Lösung aufdecken und dich als richtig, falsch oder unsicher einstufen.</p></div>
+      <p class="muted">Originalformat aus dem 207er-Katalog: Multiple-Choice-Aufgaben bleiben Multiple Choice; offene Reaktionsgleichungen beantwortest du frei und deckst danach die Original-Lösung auf.</p></div>
       <div class="grid">
         <div class="stat"><strong>${Q.length}</strong>Aufgaben gesamt</div>
         <div class="stat"><strong>${reactions}</strong>Reaktionsgleichungen</div>
@@ -222,6 +222,36 @@ function renderRecallQ(){
   const q=arr[S.i],revealed=!!S.revealed[q.id],pct=arr.length?Math.round(S.i/arr.length*100):0;
   const correctSoFar=Object.values(S.answers).filter(a=>a.grade==='correct').length;
   const tags=(q.tags||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join('');
+
+  if(q.kind==='mc'||q.kind==='tf'){
+    const prev=S.answers[q.id];
+    quiz.innerHTML=`
+      <div class="meta"><span>Fragentyp 3 · Katalog-Aufgabe ${q.sourceNo} · ${S.i+1} / ${arr.length}</span><span>${correctSoFar} richtig</span></div>
+      <div class="progress"><span style="width:${pct}%"></span></div>
+      <div class="tagrow">${tags}</div>
+      <div class="question recall-text">${esc(q.q)}</div>
+      <div class="answers">${(q.options||[]).map((opt,i)=>{
+        const cls=prev?(i===q.correct?'correct':(i===prev.sel?'wrong':'')):'';
+        return `<button class="answer ${cls}" data-k="${i}" ${prev?'disabled':''}>${q.kind==='tf'?'':String.fromCharCode(65+i)+'. '}${esc(opt)}</button>`;
+      }).join('')}</div>
+      ${prev?`<div class="solution"><strong>Original-Lösung:</strong> ${esc(q.answer)}${q.note?`<div class="source-note">${esc(q.note)}</div>`:''}</div>`:''}
+      <div class="actions">
+        ${prev?'<button class="primary" id="next3">Weiter</button>':''}
+        <button class="ghost" id="quit">Zur Übersicht</button>
+      </div>`;
+    if(!prev){
+      document.querySelectorAll('.answer').forEach(b=>b.onclick=()=>{
+        const sel=Number(b.dataset.k),ok=sel===q.correct;
+        S.answers[q.id]={sel,grade:ok?'correct':'wrong',ok,unsure:false};
+        save();renderRecallQ();
+      });
+    }else{
+      document.querySelector('#next3').onclick=()=>{S.i++;save();renderRecallQ()};
+    }
+    document.querySelector('#quit').onclick=homeView;
+    return;
+  }
+
   quiz.innerHTML=`
     <div class="meta"><span>Fragentyp 3 · Katalog-Aufgabe ${q.sourceNo} · ${S.i+1} / ${arr.length}</span><span>${correctSoFar} sicher richtig</span></div>
     <div class="progress"><span style="width:${pct}%"></span></div>
