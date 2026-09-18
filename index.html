@@ -11,12 +11,13 @@
   <header>
     <div>
       <h1>AMOC Diagnostic Trainer</h1>
-      <p>Gesamtdiagnose · Teil 1 + Teil 2 · Fortschritt wird lokal gespeichert</p>
+      <p>Fragentyp 1: Gesamtdiagnose · Fragentyp 2: gezielter Folien-Detailtrainer</p>
     </div>
-    <button id="reset" class="ghost" type="button">Fortschritt löschen</button>
+    <button id="reset" class="ghost hidden" type="button">Fortschritt löschen</button>
   </header>
   <main>
-    <section id="home" class="card"></section>
+    <section id="chooser" class="card"></section>
+    <section id="home" class="card hidden"></section>
     <section id="quiz" class="card hidden"></section>
     <section id="result" class="card hidden"></section>
   </main>
@@ -24,6 +25,8 @@
   <script src="data2.js"></script>
   <script src="data2a.js"></script>
   <script src="data3.js"></script>
+  <script src="pools.js"></script>
+  <script src="data_type2.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
