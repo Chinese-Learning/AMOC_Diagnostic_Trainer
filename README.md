@@ -1,4 +1,4 @@
-# AMOC Diagnostic Trainer
+# Anorganische Chemie Übungsfragen
 
 Interaktiver Diagnosetest für die gesamte AMOC-Vorlesung (Teil 1 und Teil 2), basierend auf den bereitgestellten Vorlesungsfolien, Übungen, Tutorien und Mock Exams.
 
