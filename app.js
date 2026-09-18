@@ -11,7 +11,7 @@ const result = document.querySelector('#result');
 const resetBtn = document.querySelector('#reset');
 
 function freshState(mode='full'){
-  return {order:[],i:0,answers:{},hints:{},flags:{},mode,seed:Math.floor(Math.random()*0x7fffffff)};
+  return {order:[],i:0,answers:{},hints:{},flags:{},revealed:{},mode,seed:Math.floor(Math.random()*0x7fffffff)};
 }
 
 function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
@@ -42,21 +42,21 @@ function optionOrder(q){
   return a;
 }
 
-function storageKey(type){return type===1?'amoc-type1-v1':'amoc-type2-v1'}
+function storageKey(type){return type===1?'amoc-type1-v1':type===2?'amoc-type2-v1':'amoc-type3-v1'}
 function migrateLegacyType1(){
   if(localStorage.getItem('amoc-type1-v1')) return;
   const legacy=localStorage.getItem('amoc-diagnostic-v2');
   if(legacy) localStorage.setItem('amoc-type1-v1',legacy);
 }
-function reportKey(type){return type===1?'amoc-type1-last-report':'amoc-type2-last-report'}
+function reportKey(type){return type===1?'amoc-type1-last-report':type===2?'amoc-type2-last-report':'amoc-type3-last-report'}
 
 function loadType(type){
   ACTIVE_TYPE=type;
-  Q=(type===1?window.AMOC_TYPE1:window.AMOC_TYPE2)||[];
+  Q=(type===1?window.AMOC_TYPE1:type===2?window.AMOC_TYPE2:window.AMOC_TYPE3)||[];
   LS=storageKey(type);
   LAST_REPORT=reportKey(type);
   try{S=JSON.parse(localStorage.getItem(LS)||'null')||freshState()}catch{S=freshState()}
-  S.answers||={};S.hints||={};S.flags||={};S.order||=[];S.i||=0;S.mode||='full';S.seed||=Math.floor(Math.random()*0x7fffffff);
+  S.answers||={};S.hints||={};S.flags||={};S.revealed||={};S.order||=[];S.i||=0;S.mode||='full';S.seed||=Math.floor(Math.random()*0x7fffffff);
   chooser.classList.add('hidden');
   resetBtn.classList.remove('hidden');
   syncQuestionPool();
@@ -85,10 +85,10 @@ function chooserView(){
   chooser.classList.remove('hidden');
   home.classList.add('hidden');quiz.classList.add('hidden');result.classList.add('hidden');
   resetBtn.classList.add('hidden');
-  const t1=(window.AMOC_TYPE1||[]).length,t2=(window.AMOC_TYPE2||[]).length;
+  const t1=(window.AMOC_TYPE1||[]).length,t2=(window.AMOC_TYPE2||[]).length,t3=(window.AMOC_TYPE3||[]).length;
   chooser.innerHTML=`
-    <div class="hero"><span class="topic">AMOC SS26</span><h2>Welchen Fragentyp möchtest du?</h2>
-    <p class="muted">Die beiden Pools sind vollständig getrennt. Fortschritt und Ergebnisse werden unabhängig voneinander gespeichert.</p></div>
+    <div class="hero"><span class="topic">AMOC SS26 · AC2 Antestat</span><h2>Welchen Fragenkatalog möchtest du?</h2>
+    <p class="muted">Die drei Pools sind getrennt. Fortschritt und Ergebnisse werden unabhängig voneinander gespeichert.</p></div>
     <div class="type-grid">
       <button class="type-card" id="type1">
         <span class="type-label">Fragentyp 1</span>
@@ -100,14 +100,50 @@ function chooserView(){
         <strong>Folien-Detailtrainer</strong>
         <span>${t2} Fragen · gezielt, auswendiglernlastig, Verfahren, Reaktionen, Spezialdetails</span>
       </button>
+      <button class="type-card" id="type3">
+        <span class="type-label">Fragentyp 3</span>
+        <strong>Antestat-Fokustrainer</strong>
+        <span>${t3} Aufgaben · deine Problemfragen plus alle Reaktionsgleichungen aus dem 207er-Katalog</span>
+      </button>
     </div>`;
   document.querySelector('#type1').onclick=()=>loadType(1);
   document.querySelector('#type2').onclick=()=>loadType(2);
+  document.querySelector('#type3').onclick=()=>loadType(3);
 }
 
 function homeView(){
   chooser.classList.add('hidden');home.classList.remove('hidden');quiz.classList.add('hidden');result.classList.add('hidden');
   const done=Object.keys(S.answers).length;
+  if(ACTIVE_TYPE===3){
+    const reactions=Q.filter(q=>q.tags?.includes('Reaktionsgleichung')).length;
+    const marked=Q.filter(q=>q.priority>=2).length;
+    const memorize=Q.filter(q=>q.tags?.includes('Auswendig lernen')).length;
+    const canResume=S.order.length&&S.i<S.order.length;
+    home.innerHTML=`
+      <div class="hero"><span class="topic">Fragentyp 3 · 207er Antestat</span><h2>Antestat-Fokustrainer</h2>
+      <p class="muted">Aktive Wiedergabe statt Multiple Choice: erst selbst beantworten, dann Lösung aufdecken und dich als richtig, falsch oder unsicher einstufen.</p></div>
+      <div class="grid">
+        <div class="stat"><strong>${Q.length}</strong>Aufgaben gesamt</div>
+        <div class="stat"><strong>${reactions}</strong>Reaktionsgleichungen</div>
+        <div class="stat"><strong>${marked}</strong>von dir markiert</div>
+        <div class="stat"><strong>${memorize}</strong>Auswendig lernen</div>
+      </div>
+      <div class="actions">
+        ${canResume?'<button class="primary" id="resume3">Letzte Runde fortsetzen</button>':''}
+        <button class="secondary" id="mixed3">Neue gemischte Runde</button>
+        <button class="secondary" id="marked3">Nur deine markierten Aufgaben</button>
+        <button class="secondary" id="reaction3">Nur Reaktionsgleichungen</button>
+        ${done?'<button class="ghost" id="showres">Zwischenauswertung</button>':''}
+        <button class="ghost" id="backtypes">Fragentyp wechseln</button>
+      </div>`;
+    if(canResume)document.querySelector('#resume3').onclick=renderQ;
+    document.querySelector('#mixed3').onclick=()=>startType3('mixed');
+    document.querySelector('#marked3').onclick=()=>startType3('marked');
+    document.querySelector('#reaction3').onclick=()=>startType3('reactions');
+    if(done)document.querySelector('#showres').onclick=results;
+    document.querySelector('#backtypes').onclick=chooserView;
+    return;
+  }
   const p1=Q.filter(x=>x.part==='Teil 1').length,p2=Q.filter(x=>x.part==='Teil 2').length;
   const canResume=S.order.length&&S.i<S.order.length;
   const title=ACTIVE_TYPE===1?'Gesamtdiagnose':'Folien-Detailtrainer';
@@ -132,6 +168,16 @@ function homeView(){
   document.querySelector('#backtypes').onclick=chooserView;
 }
 
+function startType3(mode){
+  const pool=mode==='reactions'?Q.filter(q=>q.tags?.includes('Reaktionsgleichung'))
+    :mode==='marked'?Q.filter(q=>q.priority>=2)
+    :Q;
+  S=freshState(mode);
+  S.order=shuffle(pool.map(q=>q.id));
+  save();
+  renderQ();
+}
+
 function startFull(){
   if(!Q.length){alert('Für diesen Fragentyp sind noch keine Fragen hinterlegt.');return}
   if(!S.order.length||S.i>=S.order.length||S.mode!=='full'){S=freshState('full');S.order=shuffle(Q.map(x=>x.id));save()}
@@ -139,6 +185,7 @@ function startFull(){
 }
 
 function renderQ(){
+  if(ACTIVE_TYPE===3)return renderRecallQ();
   home.classList.add('hidden');result.classList.add('hidden');quiz.classList.remove('hidden');
   const arr=currentSet();if(S.i>=arr.length)return results();
   const q=arr[S.i],prev=S.answers[q.id],perm=optionOrder(q),pct=arr.length?Math.round(S.i/arr.length*100):0;
@@ -169,6 +216,39 @@ function renderQ(){
   document.querySelector('#quit').onclick=homeView;
 }
 
+function renderRecallQ(){
+  home.classList.add('hidden');result.classList.add('hidden');quiz.classList.remove('hidden');
+  const arr=currentSet();if(S.i>=arr.length)return results();
+  const q=arr[S.i],revealed=!!S.revealed[q.id],pct=arr.length?Math.round(S.i/arr.length*100):0;
+  const correctSoFar=Object.values(S.answers).filter(a=>a.grade==='correct').length;
+  const tags=(q.tags||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join('');
+  quiz.innerHTML=`
+    <div class="meta"><span>Fragentyp 3 · Katalog-Aufgabe ${q.sourceNo} · ${S.i+1} / ${arr.length}</span><span>${correctSoFar} sicher richtig</span></div>
+    <div class="progress"><span style="width:${pct}%"></span></div>
+    <div class="tagrow">${tags}</div>
+    <div class="question recall-text">${esc(q.q)}</div>
+    ${revealed?`<div class="solution"><strong>Lösung aus dem 207er-Katalog:</strong><div class="recall-text">${esc(q.answer)}</div>${q.note?`<div class="source-note">${esc(q.note)}</div>`:''}</div>`:''}
+    <div class="actions">
+      ${!revealed?'<button class="primary" id="reveal">Lösung anzeigen</button>':''}
+      ${revealed?'<button class="grade good" id="gradegood">Richtig</button><button class="grade bad" id="gradebad">Falsch</button><button class="grade unsure" id="gradeunsure">Unsicher</button>':''}
+      <button class="ghost" id="quit">Zur Übersicht</button>
+    </div>`;
+  if(!revealed){
+    document.querySelector('#reveal').onclick=()=>{S.revealed[q.id]=true;save();renderRecallQ()};
+  }else{
+    document.querySelector('#gradegood').onclick=()=>gradeRecall(q,'correct');
+    document.querySelector('#gradebad').onclick=()=>gradeRecall(q,'wrong');
+    document.querySelector('#gradeunsure').onclick=()=>gradeRecall(q,'unsure');
+  }
+  document.querySelector('#quit').onclick=homeView;
+}
+
+function gradeRecall(q,grade){
+  S.answers[q.id]={grade,ok:grade==='correct',unsure:grade==='unsure'};
+  delete S.revealed[q.id];
+  S.i++;save();renderRecallQ();
+}
+
 function answer(q,originalIndex){
   S.answers[q.id]={sel:originalIndex,ok:originalIndex===q.a,hint:!!S.hints[q.id],unsure:!!S.flags[q.id]};
   delete S.hints[q.id];save();renderQ();
@@ -185,6 +265,7 @@ function stats(){
 }
 
 function results(){
+  if(ACTIVE_TYPE===3)return resultsRecall();
   home.classList.add('hidden');quiz.classList.add('hidden');result.classList.remove('hidden');
   const{ans,group}=stats(),correct=ans.filter(x=>x.ok).length,hints=ans.filter(x=>x.hint).length,unsure=ans.filter(x=>x.unsure).length;
   const pct=ans.length?Math.round(correct/ans.length*100):0,wrong=ans.filter(x=>!x.ok);
@@ -200,6 +281,54 @@ function results(){
   if(wrong.length)document.querySelector('#retry').onclick=()=>{const ids=wrong.map(x=>x.q.id);S=freshState('wrong');S.order=shuffle(ids);save();renderQ()};
   document.querySelector('#copy').onclick=async e=>{const text=document.querySelector('#report').value;try{await navigator.clipboard.writeText(text);e.currentTarget.textContent='Kopiert ✓'}catch{document.querySelector('#report').focus();document.querySelector('#report').select();e.currentTarget.textContent='Text markiert'}};
   document.querySelector('#backtypes').onclick=chooserView;
+}
+
+function resultsRecall(){
+  home.classList.add('hidden');quiz.classList.add('hidden');result.classList.remove('hidden');
+  const ans=answeredItems();
+  const correct=ans.filter(x=>x.grade==='correct').length;
+  const wrong=ans.filter(x=>x.grade==='wrong');
+  const unsure=ans.filter(x=>x.grade==='unsure');
+  const pct=ans.length?Math.round(correct/ans.length*100):0;
+  const report=reportRecall(ans);
+  if(ans.length)localStorage.setItem(LAST_REPORT,report);
+  result.innerHTML=`
+    <h2>Auswertung · Antestat-Fokustrainer</h2>
+    <div class="grid">
+      <div class="stat"><strong>${correct}/${ans.length}</strong>sicher richtig</div>
+      <div class="stat"><strong>${pct}%</strong>sicher beherrscht</div>
+      <div class="stat"><strong>${wrong.length}</strong>falsch</div>
+      <div class="stat"><strong>${unsure.length}</strong>unsicher</div>
+    </div>
+    <div class="actions">
+      <button class="primary" id="resume">${S.i<S.order.length?'Runde fortsetzen':'Zur Übersicht'}</button>
+      ${wrong.length+unsure.length?'<button class="secondary" id="retry">Falsch + unsicher wiederholen</button>':''}
+      <button class="secondary" id="copy">Ergebnisbericht kopieren</button>
+      <button class="ghost" id="backtypes">Fragentyp wechseln</button>
+    </div>
+    <h3>Bericht für ChatGPT</h3><textarea class="report" id="report" readonly>${esc(report)}</textarea>`;
+  document.querySelector('#resume').onclick=()=>S.i<S.order.length?renderRecallQ():homeView();
+  if(wrong.length+unsure.length)document.querySelector('#retry').onclick=()=>{
+    const ids=[...wrong,...unsure].map(x=>x.q.id);
+    S=freshState('wrong');S.order=shuffle(ids);save();renderRecallQ();
+  };
+  document.querySelector('#copy').onclick=async e=>{
+    const text=document.querySelector('#report').value;
+    try{await navigator.clipboard.writeText(text);e.currentTarget.textContent='Kopiert ✓'}
+    catch{document.querySelector('#report').focus();document.querySelector('#report').select();e.currentTarget.textContent='Text markiert'}
+  };
+  document.querySelector('#backtypes').onclick=chooserView;
+}
+
+function reportRecall(ans){
+  const correct=ans.filter(x=>x.grade==='correct').length;
+  const wrong=ans.filter(x=>x.grade==='wrong');
+  const unsure=ans.filter(x=>x.grade==='unsure');
+  let s=`ANTESTAT-FOKUSTRAINER\nGesamt: ${correct}/${ans.length} sicher richtig | falsch: ${wrong.length} | unsicher: ${unsure.length}\n\nZU WIEDERHOLEN:\n`;
+  for(const x of [...wrong,...unsure]){
+    s+=`\n[Aufgabe ${x.q.sourceNo} | ${(x.q.tags||[]).join(', ')}] ${x.q.q}\nLösung aus dem Katalog: ${x.q.answer}\nEinstufung: ${x.grade==='wrong'?'falsch':'unsicher'}\n`;
+  }
+  return s;
 }
 
 function reportText(ans,group){
