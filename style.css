@@ -5,3 +5,12 @@
 .type-card strong{font-size:1.35rem}
 .type-card span:last-child{font-weight:400;color:#cbd5e1;line-height:1.4}
 .type-label{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8}
+
+.recall-text{white-space:pre-wrap}
+.tagrow{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.tag{display:inline-block;background:#23304a;color:#dbe4f0;padding:5px 9px;border-radius:999px;font-size:.8rem}
+.solution{margin-top:18px;padding:16px;border:1px solid #3b4b68;background:#111827;border-radius:12px;line-height:1.5}
+.source-note{margin-top:12px;padding:10px 12px;border-left:4px solid #f59e0b;background:#2a2214;color:#fde68a;border-radius:8px}
+.grade.good{background:#153c2b;color:#e7f8ee;border:1px solid #2f855a}
+.grade.bad{background:#4a1f25;color:#fdecee;border:1px solid #b4535b}
+.grade.unsure{background:#403514;color:#fff4c2;border:1px solid #a88422}
