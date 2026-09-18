@@ -249,9 +249,9 @@ function renderQ(){
     }).join('')}</div>
     <div id="hintbox">${hintUsed?`<div class="hint"><strong>Hinweis:</strong> ${esc(q.hint)}</div>`:''}</div>
     <div class="actions">
+      ${sessionNavHtml()}
       ${!prev?'<button class="secondary" id="hint">Hinweis</button>':''}
       ${!prev?`<button class="secondary" id="flag">${flagged?'Unsicher ✓':'Unsicher markieren'}</button>`:''}
-      ${prev?'<button class="primary" id="next">Weiter</button>':''}
       <button class="ghost" id="quit">Zur Übersicht</button>
     </div>
     ${prev?`<p class="small muted">Thema nach Beantwortung: <span class="topic">${esc(q.part)} · ${esc(q.topic)}</span>${prev.hint?' · Hinweis benutzt':''}${S.flags[q.id]?' · als unsicher markiert':''}</p>`:''}`;
@@ -259,14 +259,15 @@ function renderQ(){
     document.querySelectorAll('.answer').forEach(b=>b.onclick=()=>answer(q,Number(b.dataset.k)));
     document.querySelector('#hint').onclick=()=>{S.hints[q.id]=true;save();document.querySelector('#hintbox').innerHTML=`<div class="hint"><strong>Hinweis:</strong> ${esc(q.hint)}</div>`};
     document.querySelector('#flag').onclick=e=>{S.flags[q.id]=!S.flags[q.id];save();e.currentTarget.textContent=S.flags[q.id]?'Unsicher ✓':'Unsicher markieren'};
-  }else document.querySelector('#next').onclick=()=>{S.i++;save();renderQ()};
+  } 
+  wireSessionNav();
   document.querySelector('#quit').onclick=homeView;
 }
 
 function renderRecallQ(){
   home.classList.add('hidden');result.classList.add('hidden');quiz.classList.remove('hidden');
   const arr=currentSet();if(S.i>=arr.length)return results();
-  const q=arr[S.i],revealed=!!S.revealed[q.id],pct=arr.length?Math.round(S.i/arr.length*100):0;
+  const q=arr[S.i],prevRecall=S.answers[q.id],revealed=!!S.revealed[q.id]||!!prevRecall,pct=arr.length?Math.round(S.i/arr.length*100):0;
   const correctSoFar=Object.values(S.answers).filter(a=>a.grade==='correct').length;
   const tags=(q.tags||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join('');
 
@@ -283,18 +284,18 @@ function renderRecallQ(){
       }).join('')}</div>
       ${prev?`<div class="solution"><strong>Original-Lösung:</strong> ${esc(q.answer)}${q.note?`<div class="source-note">${esc(q.note)}</div>`:''}</div>`:''}
       <div class="actions">
-        ${prev?'<button class="primary" id="next3">Weiter</button>':''}
+        ${sessionNavHtml()}
         <button class="ghost" id="quit">Zur Übersicht</button>
       </div>`;
     if(!prev){
       document.querySelectorAll('.answer').forEach(b=>b.onclick=()=>{
         const sel=Number(b.dataset.k),ok=sel===q.correct;
         S.answers[q.id]={sel,grade:ok?'correct':'wrong',ok,unsure:false};
+        markFrontierAfterAnswer();
         save();renderRecallQ();
       });
-    }else{
-      document.querySelector('#next3').onclick=()=>{S.i++;save();renderRecallQ()};
-    }
+    } 
+    wireSessionNav();
     document.querySelector('#quit').onclick=homeView;
     return;
   }
@@ -304,31 +305,37 @@ function renderRecallQ(){
     <div class="progress"><span style="width:${pct}%"></span></div>
     <div class="tagrow">${tags}</div>
     <div class="question recall-text">${esc(q.q)}</div>
-    ${revealed?`<div class="solution"><strong>Lösung aus dem 207er-Katalog:</strong><div class="recall-text">${esc(q.answer)}</div>${q.note?`<div class="source-note">${esc(q.note)}</div>`:''}</div>`:''}
+    ${revealed?`<div class="solution"><strong>Lösung aus dem 207er-Katalog:</strong><div class="recall-text">${esc(q.answer)}</div>${prevRecall?`<div class="source-note">Deine Bewertung: ${prevRecall.grade==='correct'?'Richtig':prevRecall.grade==='wrong'?'Falsch':'Unsicher'}</div>`:''}${q.note?`<div class="source-note">${esc(q.note)}</div>`:''}</div>`:''}
     <div class="actions">
-      ${!revealed?'<button class="primary" id="reveal">Lösung anzeigen</button>':''}
-      ${revealed?'<button class="grade good" id="gradegood">Richtig</button><button class="grade bad" id="gradebad">Falsch</button><button class="grade unsure" id="gradeunsure">Unsicher</button>':''}
+      ${sessionNavHtml()}
+      ${!revealed && !S.answers[q.id]?'<button class="primary" id="reveal">Lösung anzeigen</button>':''}
+      ${revealed && !S.answers[q.id]?'<button class="grade good" id="gradegood">Richtig</button><button class="grade bad" id="gradebad">Falsch</button><button class="grade unsure" id="gradeunsure">Unsicher</button>':''}
       <button class="ghost" id="quit">Zur Übersicht</button>
     </div>`;
-  if(!revealed){
+  if(!revealed && !prevRecall){
     document.querySelector('#reveal').onclick=()=>{S.revealed[q.id]=true;save();renderRecallQ()};
-  }else{
+  }else if(revealed && !prevRecall){
     document.querySelector('#gradegood').onclick=()=>gradeRecall(q,'correct');
     document.querySelector('#gradebad').onclick=()=>gradeRecall(q,'wrong');
     document.querySelector('#gradeunsure').onclick=()=>gradeRecall(q,'unsure');
   }
+  wireSessionNav();
   document.querySelector('#quit').onclick=homeView;
 }
 
 function gradeRecall(q,grade){
   S.answers[q.id]={grade,ok:grade==='correct',unsure:grade==='unsure'};
   delete S.revealed[q.id];
-  S.i++;save();renderRecallQ();
+  markFrontierAfterAnswer();
+  if(S.i===S.frontier-1 && S.frontier<S.order.length)S.i=S.frontier;
+  save();renderRecallQ();
 }
 
 function answer(q,originalIndex){
   S.answers[q.id]={sel:originalIndex,ok:originalIndex===q.a,hint:!!S.hints[q.id],unsure:!!S.flags[q.id]};
-  delete S.hints[q.id];save();renderQ();
+  delete S.hints[q.id];
+  markFrontierAfterAnswer();
+  save();renderQ();
 }
 
 function stats(){
@@ -352,9 +359,9 @@ function results(){
     <h2>Auswertung · Fragentyp ${ACTIVE_TYPE}</h2>
     <div class="grid"><div class="stat"><strong>${correct}/${ans.length}</strong>richtig</div><div class="stat"><strong>${pct}%</strong>Trefferquote</div><div class="stat"><strong>${hints}</strong>Hinweise</div><div class="stat"><strong>${unsure}</strong>unsicher</div></div>
     <table class="result-table"><thead><tr><th>Thema</th><th>Richtig</th><th>Quote</th><th>Hinweise</th><th>Unsicher</th></tr></thead><tbody>${rows}</tbody></table>
-    <div class="actions"><button class="primary" id="resume">${S.i<S.order.length?'Test fortsetzen':'Zur Übersicht'}</button>${wrong.length?'<button class="secondary" id="retry">Nur Fehler wiederholen</button>':''}<button class="secondary" id="copy">Ergebnisbericht kopieren</button><button class="ghost" id="backtypes">Fragentyp wechseln</button></div>
+    <div class="actions"><button class="primary" id="resume">${S.frontier<S.order.length?'Test fortsetzen':'Zur Übersicht'}</button>${wrong.length?'<button class="secondary" id="retry">Nur Fehler wiederholen</button>':''}<button class="secondary" id="copy">Ergebnisbericht kopieren</button><button class="ghost" id="backtypes">Fragentyp wechseln</button></div>
     <h3>Bericht für ChatGPT</h3><textarea class="report" id="report" readonly>${esc(report)}</textarea>`;
-  document.querySelector('#resume').onclick=()=>S.i<S.order.length?renderQ():homeView();
+  document.querySelector('#resume').onclick=()=>S.frontier<S.order.length?jumpToCurrentQuestion():homeView();
   if(wrong.length)document.querySelector('#retry').onclick=()=>{const ids=wrong.map(x=>x.q.id);S=freshState('wrong');S.order=shuffle(ids);save();renderQ()};
   document.querySelector('#copy').onclick=async e=>{const text=document.querySelector('#report').value;try{await navigator.clipboard.writeText(text);e.currentTarget.textContent='Kopiert ✓'}catch{document.querySelector('#report').focus();document.querySelector('#report').select();e.currentTarget.textContent='Text markiert'}};
   document.querySelector('#backtypes').onclick=chooserView;
@@ -378,13 +385,13 @@ function resultsRecall(){
       <div class="stat"><strong>${unsure.length}</strong>unsicher</div>
     </div>
     <div class="actions">
-      <button class="primary" id="resume">${S.i<S.order.length?'Runde fortsetzen':'Zur Übersicht'}</button>
+      <button class="primary" id="resume">${S.frontier<S.order.length?'Runde fortsetzen':'Zur Übersicht'}</button>
       ${wrong.length+unsure.length?'<button class="secondary" id="retry">Falsch + unsicher wiederholen</button>':''}
       <button class="secondary" id="copy">Ergebnisbericht kopieren</button>
       <button class="ghost" id="backtypes">Fragentyp wechseln</button>
     </div>
     <h3>Bericht für ChatGPT</h3><textarea class="report" id="report" readonly>${esc(report)}</textarea>`;
-  document.querySelector('#resume').onclick=()=>S.i<S.order.length?renderRecallQ():homeView();
+  document.querySelector('#resume').onclick=()=>S.frontier<S.order.length?jumpToCurrentQuestion():homeView();
   if(wrong.length+unsure.length)document.querySelector('#retry').onclick=()=>{
     const ids=[...wrong,...unsure].map(x=>x.q.id);
     S=freshState('wrong');S.order=shuffle(ids);save();renderRecallQ();
