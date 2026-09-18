@@ -2,679 +2,218 @@ window.AMOC_TYPE3 = [
   {
     "id": 30049,
     "sourceNo": 49,
-    "q": "Formuliere die vollständige, stöchiometrisch ausgeglichene Reaktionsgleichung für die Zersetzung von Cobaltcarbonat mit Säure (mit H3O+) sowie den anschließenden CO2-Nachweis mit Barytwasser.",
-    "answer": "CoCO3 + 2 H3O+ → Co2+ + CO2 + 3 H2O\nCO2 + Ba(OH)2 → BaCO3 + H2O",
-    "tags": [
-      "Reaktionsgleichung"
-    ],
+    "kind": "recall",
+    "q": "Eine Ursubstanz enthält Cobaltcarbonat. Bei der Vorprobe mit verdünnter Schwefelsäure in der Kälte ist eine Gasentwicklung zu beobachten. Aufgabenstellung: Formulieren Sie die vollständige, stöchiometrisch ausgeglichene Reaktionsgleichung für die Zersetzung des Carbonats durch die Säure (Formulierung mit H3O+) unter Berücksichtigung aller entstehenden Produkte sowie die Gleichung für den anschließenden Nachweis des Gases in Barytwasser (Ba(OH)2-Lösung).",
+    "answer": "CoCO3 + 2 H3O+ -> Co2+ + CO2 + 3 H2O CO2 + Ba(OH)2 -> BaCO3 + H2O",
+    "tags": ["Reaktionsgleichung"],
     "priority": 1,
     "note": ""
   },
   {
     "id": 30050,
     "sourceNo": 50,
-    "q": "Formuliere die Disproportionierung von salpetriger Säure zu Stickstoffmonoxid und Salpetersäure sowie die Oxidation von NO mit Luftsauerstoff zu NO2.",
-    "answer": "3 HNO2 → HNO3 + 2 NO + H2O\n2 NO + O2 → 2 NO2",
-    "tags": [
-      "Reaktionsgleichung"
-    ],
+    "kind": "recall",
+    "q": "Eine Ursubstanz enthält Kaliumnitrit. Bei der Zugabe von verdünnter H2SO4 in der Kälte zeigt sich eine Gasentwicklung und braune Dämpfe treten im Reagenzglas auf. Aufgabenstellung: Formulieren Sie die vollständige Reaktionsgleichung für die Disproportionierung der intermediär entstehenden salpetrigen Säure in wässriger Lösung zu Stickstoffmonoxid und Salpetersäure sowie die anschließende Reaktion des farblosen NO-Gases mit Luftsauerstoff zu Stickstoffdioxid.",
+    "answer": "3 HNO2 -> HNO3 + 2 NO + H2O; 2 NO + O2 -> 2 NO2",
+    "tags": ["Reaktionsgleichung"],
     "priority": 1,
     "note": ""
   },
   {
     "id": 30051,
     "sourceNo": 51,
-    "q": "Vorprobe: Na2S2O3 und KNO2 werden mit verdünnter H2SO4 versetzt und erwärmt. Das Iodat-Stärkepapier bleibt farblos. Was ist laut Katalog die Ursache?",
-    "answer": "B) Thiosulfat bildet mit Schwefelsäure stabiles Schwefeltrioxid (SO3), welches Iodat-Stärkepapier prinzipiell nicht färben kann.",
-    "tags": [
-      "Gezielte Wiederholung"
+    "kind": "mc",
+    "q": "Ein Studierender führt im Praktikum eine Vorprobe auf flüchtige Anionen mit verdünnter Säure durch. Er geht wie folgt vor: 1. Eine Spatelspitze der Ursubstanz, die Na2S2O3 und KNO2 enthält, wird im Reagenzglas vorgelegt. 2. Die Substanz wird mit 2 mL verdünnter H2SO4 versetzt. 3. Das Reagenzglas wird vorsichtig erwärmt. 4. Das entweichende Gas wird an einem mit Kaliumiodat-Stärke-Lösung befeuchteten Filterpapier vorbeigeführt. Am Ende beobachtet er keinerlei Blaufärbung des Filterpapiers, folgert daraus die Abwesenheit von Thiosulfat-Ionen und stellt fest, dass sein Ergebnis falsch ist. Was ist die Ursache für das Misslingen der Vorprobe?",
+    "options": [
+      "Das aus dem Nitrit freigesetzte Stickstoffdioxid (NO2) wirkt als Oxidationsmittel und oxidiert das aus dem Thiosulfat stammende, reduzierend wirkende Schwefeldioxid (SO2) im sauren Medium sofort zu Sulfat, sodass kein reduzierendes SO2-Gas entweichen kann, welches das Iodat-Stärkepapier bläuen würde.",
+      "Thiosulfat bildet mit Schwefelsäure stabiles Schwefeltrioxid (SO3), welches Iodat-Stärkepapier prinzipiell nicht färben kann.",
+      "Iodat-Stärkepapier reagiert spezifisch nur auf Cyanwasserstoff, während Schwefeldioxid die Störreaktion inhibiert.",
+      "Schwefelsäure maskiert Thiosulfat durch die Bildung eines kinetisch hochstabilen kovalenten Sulfito-Komplexes."
     ],
+    "correct": 1,
+    "answer": "B",
+    "tags": ["Gezielte Wiederholung"],
     "priority": 2,
-    "note": "Dein Hinweis: In Antwort B steht SO3. Du erwartest hier SO2; der Katalogeintrag bleibt bewusst unverändert."
+    "note": "Hinweis aus deinem Lernen: In Antwort B steht im Katalog SO3; du erwartest an dieser Stelle SO2. Die Originalaufgabe und die im Katalog angegebene Lösung B bleiben hier absichtlich unverändert."
   },
   {
     "id": 30059,
     "sourceNo": 59,
-    "q": "Formuliere die stöchiometrisch ausgeglichene Reaktionsgleichung für die Freisetzung von Essigsäure aus Kupfer(II)-acetat mit Schwefelsäure.",
-    "answer": "Cu(CH3COO)2 + H2SO4 → CuSO4 + 2 CH3COOH",
-    "tags": [
-      "Reaktionsgleichung"
-    ],
+    "kind": "recall",
+    "q": "Eine Ursubstanz enthält festes Kupfer(II)-acetat. Bei der Vorprobe im Reagenzglas wird eine Spatelspitze der Ursubstanz mit 2 mL verdünnter Schwefelsäure versetzt und vorsichtig erwärmt. Aufgabenstellung: Formulieren Sie die vollständige, stöchiometrisch ausgeglichene Reaktionsgleichung für die Freisetzung der charakteristisch riechenden Essigsäure aus diesem Salz durch die Schwefelsäure.",
+    "answer": "Cu(CH3COO)2 + H2SO4 -> CuSO4 + 2 CH3COOH",
+    "tags": ["Reaktionsgleichung"],
     "priority": 1,
     "note": ""
   },
   {
     "id": 30060,
     "sourceNo": 60,
-    "q": "Formuliere die vollständige Reaktionsgleichung für die Zersetzung von festem Kaliumthiocyanat mit konzentrierter Schwefelsäure und Wasser.",
-    "answer": "2 KSCN + 2 H2SO4 + 2 H2O → 2 COS + (NH4)2SO4 + K2SO4",
-    "tags": [
-      "Reaktionsgleichung",
-      "Auswendig lernen"
-    ],
+    "kind": "recall",
+    "q": "Eine Ursubstanz enthält Kaliumthiocyanat. Bei der Vorprobe mit konzentrierter Schwefelsäure kommt es in der Hitze zu einer heftigen Zersetzung, bei der unter anderem Kohlenstoffoxidsulfid (COS) entsteht. Formulieren Sie die vollständige, ausgeglichene Reaktionsgleichung für die Zersetzung von festem Kaliumthiocyanat mit konzentrierter Schwefelsäure und Wasser.",
+    "answer": "2 KSCN + 2 H2SO4 + 2 H2O -> 2 COS + (NH4)2SO4 + K2SO4",
+    "tags": ["Reaktionsgleichung","Auswendig lernen"],
     "priority": 3,
     "note": ""
   },
   {
     "id": 30068,
     "sourceNo": 68,
-    "q": "Richtig oder falsch: Braunfärbung und braune, stechend riechende Dämpfe beim Erhitzen mit konzentrierter Schwefelsäure sind ein eindeutiger Beweis für Nitrat oder Nitrit.",
+    "kind": "tf",
+    "q": "Richtig oder Falsch: Wenn eine Ursubstanz beim Erhitzen mit konzentrierter Schwefelsäure eine intensive Braunfärbung der Flüssigkeit und die Entwicklung von stechend riechenden braunen Dämpfen zeigt, ist dies ein eindeutiger Beweis dafür, dass in der Ursubstanz Nitrat- oder Nitritionen vorlagen.",
+    "options": ["Richtig","Falsch"],
+    "correct": 1,
     "answer": "Falsch",
-    "tags": [
-      "Wichtig"
-    ],
+    "tags": ["Wichtig"],
     "priority": 2,
-    "note": "Die Beobachtung ist kein eindeutiger Beweis."
+    "note": ""
   },
   {
     "id": 30069,
     "sourceNo": 69,
-    "q": "Formuliere die vollständige, stöchiometrisch ausgeglichene Zersetzung von Kaliumhexacyanidoferrat(II) mit konzentrierter Schwefelsäure und Wasser. Welches giftige Gas entsteht?",
-    "answer": "K4[Fe(CN)6] + 6 H2SO4 + 6 H2O → 2 K2SO4 + FeSO4 + 3 (NH4)2SO4 + 6 CO",
-    "tags": [
-      "Reaktionsgleichung",
-      "Auswendig lernen"
-    ],
+    "kind": "recall",
+    "q": "Eine trockene Ursubstanz enthält Kaliumhexacyanidoferrat(II). Bei der Vorprobe wird eine Spatelspitze dieser Substanz mit konzentrierter Schwefelsäure versetzt und vorsichtig im Abzug erhitzt. Neben Kaliumsulfat und Eisensulfat entsteht ein farbloses, brennbares und hochgiftiges Gas, das jedoch kein Cyanwasserstoff (HCN) ist. Formulieren Sie die vollständige, stöchiometrisch ausgeglichene Reaktionsgleichung für diese Zersetzung unter Einbeziehung von Wasser. Unterstreichen Sie in der Gleichung das giftige Gas.",
+    "answer": "K4[Fe(CN)6] + 6 H2SO4 + 6 H2O -> 2 K2SO4 + FeSO4 + 3 (NH4)2SO4 + 6 CO",
+    "tags": ["Reaktionsgleichung","Auswendig lernen"],
     "priority": 3,
     "note": ""
   },
   {
     "id": 30070,
     "sourceNo": 70,
-    "q": "Formuliere die Komproportionierung von Iodat und Iodid im sauren Medium mit H3O+.",
-    "answer": "IO3− + 5 I− + 6 H3O+ → 3 I2 + 9 H2O",
-    "tags": [
-      "Reaktionsgleichung",
-      "Auswendig lernen"
-    ],
+    "kind": "recall",
+    "q": "Eine Ursubstanz enthält eine Mischung aus Kaliumiodid und Kaliumiodat. Beim Versetzen dieser Probe mit verdünnter Schwefelsäure in der Kälte ist sofort eine intensive Braunfärbung und das Ausfallen eines dunklen Feststoffs zu beobachten, ohne dass ein äußeres Oxidationsmittel zugesetzt wurde. Formulieren Sie die vollständige, ausgeglichene Redoxgleichung (Komproportionierung) für diese Reaktion im sauren Medium (mit H3O+).",
+    "answer": "IO3- + 5 I- + 6 H3O+ -> 3 I2 + 9 H2O",
+    "tags": ["Reaktionsgleichung","Auswendig lernen"],
     "priority": 3,
-    "note": "Besonders wichtig: die stöchiometrischen Koeffizienten."
+    "note": "Für dich besonders wichtig: die stöchiometrischen Koeffizienten."
   },
   {
     "id": 30078,
     "sourceNo": 78,
-    "q": "Formuliere die stöchiometrisch ausgeglichene Reaktionsgleichung für den Phosphatnachweis mit Ammoniummolybdat im Sauren.",
-    "answer": "HPO4^2− + 12 MoO4^2− + 3 NH4+ + 23 H+ → (NH4)3[P(Mo3O10)4] + 12 H2O",
-    "tags": [
-      "Reaktionsgleichung",
-      "Auswendig lernen"
-    ],
+    "kind": "recall",
+    "q": "Eine Ursubstanz enthält Natriumhydrogenphosphat. Um das Vorhandensein von Phosphat-Ionen bereits vor dem Trennungsgang zu prüfen, wird eine Spatelspitze der Ursubstanz in konzentrierter Salpetersäure gelöst und mit einem Überschuss an Ammoniummolybdat-Lösung ((NH4)2MoO4) versetzt. Beim Erwärmen fällt ein charakteristischer, kristalliner, gelber Niederschlag von Ammoniummolybdatophosphat aus. Formulieren Sie die vollständige, stöchiometrisch ausgeglichene Reaktionsgleichung für diese Nachweisreaktion (Formulierung mit H+).",
+    "answer": "HPO42- + 12 MoO42- + 3 NH4+ + 23 H+ -> (NH4)3[P(Mo3O10)4] + 12 H2O",
+    "tags": ["Reaktionsgleichung","Auswendig lernen"],
     "priority": 3,
     "note": ""
   },
   {
     "id": 30079,
     "sourceNo": 79,
-    "q": "Formuliere beide Gleichungen der Phosphorsalzperle: Bildung von Natriummetaphosphat und anschließende Reaktion mit CoO.",
-    "answer": "Na(NH4)(HPO4) → NaPO3 + NH3 + H2O\nNaPO3 + CoO → NaCoPO4",
-    "tags": [
-      "Reaktionsgleichung",
-      "Auswendig lernen"
-    ],
+    "kind": "recall",
+    "q": "Ein Studierender möchte im Praktikum eine Phosphorsalzperle als Vorprobe auf Schwermetalle herstellen. Er geht wie folgt vor: 1. Er nimmt ein ausgeglühtes Magnesiastäbchen und taucht das heiße Ende in festes Natriumammoniumhydrogenphosphat. 2. Er schmilzt das Salz in der Bunsenbrennerflamme auf, bis sich eine klare, farblose Perle bildet. 3. Er nimmt eine winzige Spur seiner cobalt haltigen Ursubstanz mit der heißen Perle auf. Er hält die Perle für längere Zeit in die oxidierende (äußere) Zone der Bunsenbrennerflamme und lässt sie abkühlen. Am Ende beobachtet er eine intensive, tiefblaue Färbung der Perle. Formulieren Sie die chemische Reaktionsgleichung für den ersten Schritt (das Entwässern und Zersetzen des Natriumammoniumhydrogenphosphats in der Hitze zu Natriummetaphosphat sowie die anschließende Reaktion dieses Metaphosphats mit dem Metalloxid (CoO) zur farbigen Perle.",
+    "answer": "Na(NH4)(HPO4) -> NaPO3 + NH3 + H2O; NaPO3 + CoO -> NaCoPO4",
+    "tags": ["Reaktionsgleichung","Auswendig lernen"],
     "priority": 3,
     "note": ""
   },
   {
     "id": 30082,
     "sourceNo": 82,
-    "q": "Reduktionsprobe im Glühröhrchen: Metallspiegel wird im Schwefeldampf intensiv gelb-orangerot. Welches Kation lag vor?",
-    "answer": "Cd2+",
-    "tags": [
-      "Auswendig lernen"
-    ],
+    "kind": "mc",
+    "q": "Ein Studierender führt im Praktikum eine Reduktionsprobe im Glühröhrchen durch. Er geht wie folgt vor: 1. Er mischt eine Spatelspitze der Ursubstanz Natriumoxalat. 2. Er erhitzt die Mischung intensiv in der rauschenden Brennerflamme. 3. An der kälteren Glaswand bildet sich ein glänzender, metallischer Spiegel. 4. Er lässt das Röhrchen abkühlen, fügt ein kleines Körnchen Schwefel hinzu und erhitzt den Metallspiegel vorsichtig im Schwefeldampf. Am Ende beobachtet er, dass sich der Spiegel in einen intensiv gelb-orangeroten Belag umwandelt. Welches Kation lag in seiner Ursubstanz vor?",
+    "options": ["Pb2+","Bi3+","Cd2+","Cu2+"],
+    "correct": 2,
+    "answer": "C",
+    "tags": ["Auswendig lernen"],
     "priority": 3,
     "note": ""
   },
   {
     "id": 30083,
     "sourceNo": 83,
-    "q": "Cadmiumcarbonat wird im Glühröhrchen stark erhitzt. Welcher Feststoff ist in der Hitze tiefbraun und nach dem Abkühlen gelb-braun?",
-    "answer": "Cadmiumoxid (CdO)",
-    "tags": [
-      "Auswendig lernen"
-    ],
+    "kind": "mc",
+    "q": "Ein Studierender führt im Praktikum die Glühröhrchenprobe durch. Er geht wie folgt vor: 1. Er gibt eine Spatelspitze einer reinen Cadmiumcarbonat-Probe in das Glühröhrchen. 2. Er erhitzt die Substanz intensiv mit der rauschenden Brennerflamme. Er beobachtet, dass sich das weiße Pulver zersetzt und ein stabiler, nicht-flüchtiger Feststoffrückstand im heißen Teil des Röhrchens zurückbleibt, der in der Hitze tiefbraun, nach dem Abkühlen jedoch gelb-braun aussieht. Es bildet sich in diesem Fall kein glänzender Spiegel. Welche Verbindung ist für diesen farbwechselnden Rückstand verantwortlich?",
+    "options": ["Elementares Cadmium-Metall","Cadmiumoxid (CdO)","Cadmiumsulfid (CdS)","Cadmiumchlorid (CdCl2)"],
+    "correct": 1,
+    "answer": "B",
+    "tags": ["Auswendig lernen"],
     "priority": 3,
     "note": ""
   },
   {
     "id": 30086,
     "sourceNo": 86,
-    "q": "Richtig oder falsch: Ein metallischer Spiegel, der im Luftstrom zu weißem Rauch oxidiert, deutet im Ionenkanon auf Sb oder Bi hin.",
+    "kind": "tf",
+    "q": "Richtig oder Falsch: Wenn man eine Ursubstanz im Glühröhrchen erhitzt und sich an der kälteren Glaswand ein glänzender, metallischer Spiegel abscheidet, der beim Erwärmen dieses Spiegels im Luftstrom zu einem weißen Rauch oxidiert wird, deutet dies im Rahmen des Ionenkanons auf die Anwesenheit von Antimon (Sb) oder Bismut (Bi) hin.",
+    "options": ["Richtig","Falsch"],
+    "correct": 0,
     "answer": "Richtig",
-    "tags": [
-      "Auswendig lernen"
-    ],
+    "tags": ["Auswendig lernen"],
     "priority": 3,
-    "note": "Dein Hinweis: Du hältst die im Katalog angegebene Lösung für fehlerhaft; die Aufgabe bleibt trotzdem im Lernpool."
+    "note": "Hinweis aus deinem Lernen: Du hältst die im Katalog angegebene Lösung für fehlerhaft. Die Originalangabe wird trotzdem unverändert trainiert."
   },
   {
     "id": 30088,
     "sourceNo": 88,
-    "q": "Formuliere die Ionengleichung für die Fällung, die beim Lösen einer Mischung aus AgNO3 und NaCl in Wasser auftritt.",
-    "answer": "Ag+ + Cl− → AgCl",
-    "tags": [
-      "Reaktionsgleichung"
-    ],
+    "kind": "recall",
+    "q": "Ein Studierender erhält eine Ursubstanz, die aus einer Mischung von festem Silbernitrat, Natriumchlorid und Nickelnitrat besteht. Er gibt eine Spatelspitze dieser Ursubstanz in ein Becherglas mit destilliertem Wasser. Er beobachtet sofort das Entstehen eines dichten, weißen Niederschlags, obwohl alle drei Ausgangssalze für sich genommen leicht wasserlöslich sind. Formulieren Sie die chemische Ionengleichung für die Reaktion, die sich beim Lösen der Ursubstanz im Wasser abspielt, und benennen Sie das unlösliche Produkt.",
+    "answer": "Ag+ + Cl- -> AgCl (Silberchlorid)",
+    "tags": ["Reaktionsgleichung"],
     "priority": 1,
     "note": ""
   },
   {
     "id": 30089,
     "sourceNo": 89,
-    "q": "Formuliere die Metathesereaktion beim Soda-Pottasche-Aufschluss von Bariumsulfat mit Natriumcarbonat.",
-    "answer": "BaSO4 + Na2CO3 → BaCO3 + Na2SO4",
-    "tags": [
-      "Reaktionsgleichung",
-      "Wichtig"
-    ],
+    "kind": "recall",
+    "q": "Ein schwerlöslicher Rückstand besteht aus Bariumsulfat. Um diesen für die nasschemische Analytik in Lösung zu bringen, wird ein klassischer Soda-Pottasche-Aufschluss durch Verdampfen bzw. Zusammenschmelzen mit einem Überschuss einer Natriumcarbonat/Kaliumcarbonat-Mischung durchgeführt. Formulieren Sie die vollständige, stöchiometrisch ausgeglichene Reaktionsgleichung für die Metathesereaktion beim Zusammenschmelzen von Bariumsulfat mit reinem Natriumcarbonat.",
+    "answer": "BaSO4 + Na2CO3 -> BaCO3 + Na2SO4",
+    "tags": ["Reaktionsgleichung","Wichtig"],
     "priority": 2,
     "note": ""
   },
   {
     "id": 30090,
     "sourceNo": 90,
-    "q": "Formuliere die vollständige Redoxgleichung der Oxidationsschmelze von Cr2O3 mit Na2CO3 und KNO3.",
-    "answer": "Cr2O3 + 2 Na2CO3 + 3 KNO3 → 2 Na2CrO4 + 3 KNO2 + 2 CO2",
-    "tags": [
-      "Reaktionsgleichung",
-      "Auswendig lernen"
-    ],
+    "kind": "recall",
+    "q": "Ein Rückstand enthält Chrom(III)-oxid. Dieser soll über eine Oxidationsschmelze aufgeschlossen werden, um das Chrom in eine wasserlösliche Form zu überführen. Hierzu wird das Pulver mit einer Mischung aus Natriumcarbonat und Kaliumnitrat intensiv erhitzt. Es entsteht eine gelbe Schmelze. Formulieren Sie die vollständige, stöchiometrisch ausgeglichene Redoxgleichung für diesen Schmelzvorgang.",
+    "answer": "Cr2O3 + 2 Na2CO3 + 3 KNO3 -> 2 Na2CrO4 + 3 KNO2 + 2 CO2",
+    "tags": ["Reaktionsgleichung","Auswendig lernen"],
     "priority": 3,
     "note": ""
   },
   {
     "id": 30091,
     "sourceNo": 91,
-    "q": "Formuliere den sauren Aufschluss von Al2O3 mit geschmolzenem KHSO4.",
-    "answer": "Al2O3 + 6 KHSO4 → Al2(SO4)3 + 3 K2SO4 + 3 H2O",
-    "tags": [
-      "Reaktionsgleichung",
-      "Auswendig lernen"
-    ],
+    "kind": "recall",
+    "q": "Ein schwerlöslicher Rückstand, der aus Aluminiumoxid besteht, soll durch einen sauren Aufschluss mit geschmolzenem Kaliumhydrogensulfat in eine lösliche Form überführt werden. Bei der Reaktion in der Schmelze entsteht unter Wasserabspaltung ein lösliches Sulfatsalz. Formulieren Sie die vollständige, ausgeglichene Reaktionsgleichung für den Aufschluss in der Hitze.",
+    "answer": "Al2O3 + 6 KHSO4 -> Al2(SO4)3 + 3 K2SO4 + 3 H2O",
+    "tags": ["Reaktionsgleichung","Auswendig lernen"],
     "priority": 3,
     "note": ""
   },
   {
     "id": 30096,
     "sourceNo": 96,
-    "q": "Richtig oder falsch: SbCl3 bildet in viel Wasser SbOCl als weiße Trübung; überschüssige HCl löst diese wieder.",
-    "answer": "Richtig",
-    "tags": [
-      "Wichtig"
-    ],
+    "kind": "tf",
+    "q": "Richtig oder Falsch: Wenn man eine Ursubstanz, die Antimon(III)-chlorid enthält, in ein Becherglas mit viel reinem Wasser gibt, bildet sich augenblicklich eine dichte weiße Trübung durch das Ausfallen von schwerlöslichem Antimonoxidchlorid (SbOCl). Diese Trübung lässt sich durch Zugabe von überschüssiger Salzsäure (HCl) wieder vollständig auflösen.",
+    "options": ["Richtig","Falsch"],
+    "correct": 0,
+    "answer": "Richtig (Es handelt sich um eine reversible Hydrolysereaktion, die durch Säure zurückgedrängt werden kann).",
+    "tags": ["Wichtig"],
     "priority": 2,
-    "note": "Reversible Hydrolyse; Säure verschiebt das Gleichgewicht zurück."
+    "note": ""
   },
   {
     "id": 30098,
     "sourceNo": 98,
-    "q": "Formuliere die Ionengleichung für die Fällung von Bariumsulfat aus Ba2+ und Sulfat.",
-    "answer": "Ba2+ + SO4^2− → BaSO4",
-    "tags": [
-      "Reaktionsgleichung"
-    ],
+    "kind": "recall",
+    "q": "Ein Studierender hat eine Ursubstanz vorliegen, die eine Mischung aus festem Kupfer(II)-sulfat und Bariumchlorid enthält. Beide Salze sind für sich genommen in reinem Wasser hervorragend löslich. Er gibt die Mischung in Wasser, woraufhin sich sofort ein dicker weißer Niederschlag bildet. Formulieren Sie die vollständige, stöchiometrisch ausgeglichene Ionengleichung für die Fällungsreaktion, die hier beim ersten Kontakt mit Wasser abspielt, und benennen Sie den Niederschlag.",
+    "answer": "Ba2+ + SO42- -> BaSO4 (Bariumsulfat)",
+    "tags": ["Reaktionsgleichung"],
     "priority": 1,
     "note": ""
   },
   {
     "id": 30099,
     "sourceNo": 99,
-    "q": "Formuliere die reversible Hydrolyse von BiCl3/Bi3+ zu BiOCl und zeige den Einfluss von HCl.",
-    "answer": "Bi3+ + Cl− + H2O ⇌ BiOCl + 2 H+\noder: BiCl3 + H2O ⇌ BiOCl + 2 HCl",
-    "tags": [
-      "Reaktionsgleichung",
-      "Gezielte Wiederholung"
-    ],
+    "kind": "recall",
+    "q": "Eine Ursubstanz enthält Bismut(III)-chlorid. Ein Studierender gibt eine Spatelspitze davon in ein Becherglas mit einer großen Menge destilliertem Wasser. Er beobachtet das sofortige Ausfallen eines dichten, weißen Niederschlags. Als er anschließend tropfenweise konzentrierte Salzsäure (HCl) zugibt, löst sich der Niederschlag wieder vollständig auf. Aufgabenstellung: Formulieren Sie die reversible Hydrolysereaktion von BiCl3 mit Wasser und zeigen Sie durch die Gleichung, warum die Zugabe von HCl das Gleichgewicht wieder auf die linke Seite verschiebt.",
+    "answer": "Bi3+ + Cl- + H2O <-> BiOCl + 2 H+ (oder: BiCl3 + H2O <-> BiOCl + 2 HCl)",
+    "tags": ["Reaktionsgleichung","Gezielte Wiederholung"],
     "priority": 2,
-    "note": ""
-  },
-  {
-    "id": 30100,
-    "sourceNo": 100,
-    "q": "Formuliere den Freiberger Aufschluss von AgI mit Na2CO3 und Schwefel.",
-    "answer": "2 AgI + Na2CO3 + S → Ag2S + 2 NaI + CO2 + 0.5 O2\nIm Katalog zusätzlich als Alternative angegeben: 2 AgI + Na2CO3 + S → Ag2S + 2 NaI + CO2",
-    "tags": [
-      "Reaktionsgleichung",
-      "Gezielte Wiederholung"
-    ],
-    "priority": 2,
-    "note": ""
-  },
-  {
-    "id": 30101,
-    "sourceNo": 101,
-    "q": "Warum löst sich NiCO3 in verdünnter HCl, obwohl es in Wasser unlöslich ist?",
-    "answer": "Die Protonen zerstören das Carbonat-Anion unter Bildung von Wasser und CO2; dadurch wird das Lösegleichgewicht auf die Produktseite gezogen.",
-    "tags": [
-      "Gezielte Wiederholung"
-    ],
-    "priority": 2,
-    "note": ""
-  },
-  {
-    "id": 30107,
-    "sourceNo": 107,
-    "q": "Richtig oder falsch: KHSO4 eignet sich für basische/amphotere Metalloxide, aber nicht für BaSO4.",
-    "answer": "Richtig",
-    "tags": [
-      "Gezielte Wiederholung"
-    ],
-    "priority": 2,
-    "note": ""
-  },
-  {
-    "id": 30108,
-    "sourceNo": 108,
-    "q": "Formuliere die im Katalog angegebene Bildung von Königswasser aus HNO3 und HCl.",
-    "answer": "HNO3 + 3 HCl → NOCl + 2 Cl + 2 H2O\nAlternativ im Katalog: HNO3 + 3 HCl → NOCl + Cl2 + 2 H2O",
-    "tags": [
-      "Reaktionsgleichung",
-      "Gezielte Wiederholung"
-    ],
-    "priority": 2,
-    "note": ""
-  },
-  {
-    "id": 30112,
-    "sourceNo": 112,
-    "q": "Formuliere die allgemeine Metathesereaktion des Soda-Auszuges am Beispiel von Cu3(PO4)2.",
-    "answer": "Cu3(PO4)2 + 3 CO3^2− → 3 CuCO3 + 2 PO4^3−",
-    "tags": [
-      "Reaktionsgleichung",
-      "Gezielte Wiederholung"
-    ],
-    "priority": 2,
-    "note": ""
-  },
-  {
-    "id": 30115,
-    "sourceNo": 115,
-    "q": "Warum befindet sich NH4+ nach korrekt durchgeführtem, heißem Soda-Auszug nicht mehr im Filtrat?",
-    "answer": "Im stark alkalischen Milieu wird NH4+ zu flüchtigem NH3 deprotoniert und beim Kochen ausgetrieben.",
-    "tags": [
-      "Gezielte Wiederholung"
-    ],
-    "priority": 2,
-    "note": ""
-  },
-  {
-    "id": 30117,
-    "sourceNo": 117,
-    "q": "Warum kann PbCl2 durch heißes Wasser von AgCl getrennt werden?",
-    "answer": "PbCl2 besitzt eine stark temperaturabhängige Löslichkeit und löst sich in heißem Wasser, während AgCl unlöslich bleibt.",
-    "tags": [
-      "Gezielte Wiederholung"
-    ],
-    "priority": 2,
-    "note": ""
-  },
-  {
-    "id": 30118,
-    "sourceNo": 118,
-    "q": "Wie heißt die charakteristische Erscheinung beim Auskristallisieren von PbI2?",
-    "answer": "Goldregen – goldglänzende, schuppige Kristalle.",
-    "tags": [
-      "Gezielte Wiederholung"
-    ],
-    "priority": 2,
-    "note": ""
-  },
-  {
-    "id": 30120,
-    "sourceNo": 120,
-    "q": "Richtig oder falsch: Antimon gelangt beim Soda-Auszug als lösliche Spezies in das Filtrat.",
-    "answer": "Falsch. Antimon fällt wie viele Schwermetalle als unlösliches Oxid/Hydroxid bzw. basisches Carbonat im Rückstand aus.",
-    "tags": [
-      "Gezielte Wiederholung"
-    ],
-    "priority": 2,
-    "note": ""
-  },
-  {
-    "id": 30125,
-    "sourceNo": 125,
-    "q": "Formuliere die Redoxgleichung für das Lösen von CuS in verdünnter Salpetersäure im sauren Medium.",
-    "answer": "3 CuS + 2 NO3− + 8 H3O+ → 3 Cu2+ + 3 S + 2 NO + 12 H2O",
-    "tags": [
-      "Reaktionsgleichung",
-      "Gezielte Wiederholung"
-    ],
-    "priority": 2,
-    "note": ""
-  },
-  {
-    "id": 30126,
-    "sourceNo": 126,
-    "q": "Bei der Trennung von Bi, Cu und Cd: Was geschieht beim entsprechenden Fällungsschritt mit Bismut?",
-    "answer": "Bismut fällt als weißes Bi(OH)3 aus, während Cu2+ und Cd2+ gelöst bleiben.",
-    "tags": [
-      "Gezielte Wiederholung"
-    ],
-    "priority": 2,
-    "note": ""
-  },
-  {
-    "id": 30129,
-    "sourceNo": 129,
-    "q": "Was beobachtet man bei der Zementierung von Antimon an einem Eisennagel?",
-    "answer": "Tiefschwarze kristalline Ablagerungen von elementarem Antimon auf dem Eisen.",
-    "tags": [
-      "Gezielte Wiederholung"
-    ],
-    "priority": 2,
-    "note": ""
-  },
-  {
-    "id": 30132,
-    "sourceNo": 132,
-    "q": "Wie wird Blei nach dem Lösen der Sulfide mit HNO3 abgetrennt?",
-    "answer": "Die Lösung wird mit konzentrierter H2SO4 abgeraucht; Blei fällt als weißes, schwerlösliches PbSO4 aus.",
-    "tags": [
-      "Gezielte Wiederholung"
-    ],
-    "priority": 2,
-    "note": ""
-  },
-  {
-    "id": 30133,
-    "sourceNo": 133,
-    "q": "Warum kann ein Bismutnachweis als schwarzes Bi2S3 den gelben CdS-Nachweis maskieren?",
-    "answer": "Ein zuvor kaum sichtbarer weißer Bismuthydroxid-Niederschlag kann bei H2S-Zugabe schwarzes Bi2S3 bilden und das gelbe CdS optisch überdecken.",
-    "tags": [
-      "Gezielte Wiederholung"
-    ],
-    "priority": 2,
-    "note": ""
-  },
-  {
-    "id": 30134,
-    "sourceNo": 134,
-    "q": "Welche Farben besitzen SnS2, Sb2S3 und Sb2S5 laut Katalog?",
-    "answer": "SnS2 ist goldgelb; Sb2S3 und Sb2S5 sind intensiv orange-rot.",
-    "tags": [
-      "Gezielte Wiederholung"
-    ],
-    "priority": 2,
-    "note": ""
-  },
-  {
-    "id": 30138,
-    "sourceNo": 138,
-    "q": "Formuliere die Hydrolysegleichung von Urotropin in Wasser in der Hitze.",
-    "answer": "(CH2)6N4 + 4 H+ + 6 H2O → 4 NH4+ + 6 CH2O",
-    "tags": [
-      "Reaktionsgleichung",
-      "Auswendig lernen"
-    ],
-    "priority": 3,
-    "note": ""
-  },
-  {
-    "id": 30139,
-    "sourceNo": 139,
-    "q": "Was wird beim alkalischen Sturz mit NaOH/H2O2 aus dem Fe/Al/Cr-Hydroxidgemisch erreicht?",
-    "answer": "Fe(OH)3 bleibt als rotbrauner unlöslicher Rückstand; Al geht als Aluminat und Cr als gelbes Chromat in Lösung.",
-    "tags": [
-      "Wichtig"
-    ],
-    "priority": 2,
-    "note": ""
-  },
-  {
-    "id": 30140,
-    "sourceNo": 140,
-    "q": "Warum kann ein zu kurz und kalt durchgeführter alkalischer Sturz einen falsch-negativen Chromnachweis liefern?",
-    "answer": "Die Oxidation von Cr(III) zu Cr(VI) mit H2O2 im alkalischen Medium benötigt intensives Aufkochen; ohne ausreichende Aktivierung bleibt die Lösung farblos.",
-    "tags": [
-      "Wichtig"
-    ],
-    "priority": 2,
-    "note": ""
-  },
-  {
-    "id": 30141,
-    "sourceNo": 141,
-    "q": "Formuliere die Oxidation von Cr(OH)3 mit H2O2 im alkalischen Medium zu Chromat.",
-    "answer": "2 Cr(OH)3 + 3 H2O2 + 4 OH− → 2 CrO4^2− + 8 H2O",
-    "tags": [
-      "Reaktionsgleichung",
-      "Wichtig"
-    ],
-    "priority": 2,
-    "note": ""
-  },
-  {
-    "id": 30147,
-    "sourceNo": 147,
-    "q": "Welche Farben besitzen MnS, ZnS, CoS und NiS?",
-    "answer": "MnS fleischfarben/rosa; ZnS weiß; CoS und NiS tiefschwarz.",
-    "tags": [
-      "Wichtig"
-    ],
-    "priority": 2,
-    "note": ""
-  },
-  {
-    "id": 30151,
-    "sourceNo": 151,
-    "q": "Wie kann Zn2+ nach Abtrennung des Braunsteins aus dem alkalischen Filtrat einfach nachgewiesen werden?",
-    "answer": "Mit H2S-Wasser oder (NH4)2S fällt weißes ZnS aus.",
-    "tags": [
-      "Gezielte Wiederholung"
-    ],
-    "priority": 2,
-    "note": ""
-  },
-  {
-    "id": 30156,
-    "sourceNo": 156,
-    "q": "Welches Erdalkalichromat fällt im essigsauren Medium bevorzugt aus?",
-    "answer": "Gelbes Bariumchromat (BaCrO4).",
-    "tags": [
-      "Gezielte Wiederholung"
-    ],
-    "priority": 2,
-    "note": ""
-  },
-  {
-    "id": 30161,
-    "sourceNo": 161,
-    "q": "Formuliere die Ionengleichung für die Fällung von Ba2+ mit Dichromat, bei der BaCrO4 und H+ entstehen.",
-    "answer": "2 Ba2+ + Cr2O7^2− + H2O → 2 BaCrO4 + 2 H+",
-    "tags": [
-      "Reaktionsgleichung"
-    ],
-    "priority": 1,
-    "note": ""
-  },
-  {
-    "id": 30162,
-    "sourceNo": 162,
-    "q": "Formuliere die Ionengleichung für den Calcium-Nachweis mit Oxalat.",
-    "answer": "Ca2+ + C2O4^2− → CaC2O4",
-    "tags": [
-      "Reaktionsgleichung"
-    ],
-    "priority": 1,
-    "note": ""
-  },
-  {
-    "id": 30165,
-    "sourceNo": 165,
-    "q": "Wie muss man nach einer Mg-Fällung mit Oxin vorgehen, wenn anschließend Magneson verwendet werden soll?",
-    "answer": "Mg-Oxinat in wenig Königswasser oder konzentrierter Säure lösen, eindampfen, in Wasser aufnehmen und erst dann Magneson zusetzen.",
-    "tags": [
-      "Gezielte Wiederholung"
-    ],
-    "priority": 2,
-    "note": ""
-  },
-  {
-    "id": 30167,
-    "sourceNo": 167,
-    "q": "Welches Ion kann einen direkten Thiocyanat-Nachweis auf Fe3+ stören bzw. im regulären Trennungsgang vorher abgetrennt werden?",
-    "answer": "Kobalt; es bildet einen blauen Thiocyanatkomplex, der bei direkter Probe stören kann.",
-    "tags": [
-      "Gezielte Wiederholung"
-    ],
-    "priority": 2,
-    "note": ""
-  },
-  {
-    "id": 30168,
-    "sourceNo": 168,
-    "q": "Warum kann ein direkter Nickel-Nachweis mit DMG aus der Ursubstanz durch einen dunklen Schlamm gestört werden?",
-    "answer": "Auch Mn, Cu, Co und Fe können dunkle DMG-Komplexe bzw. störende Niederschläge bilden und den roten Nickelkomplex maskieren.",
-    "tags": [
-      "Gezielte Wiederholung"
-    ],
-    "priority": 2,
-    "note": ""
-  },
-  {
-    "id": 30169,
-    "sourceNo": 169,
-    "q": "Welches Ion stört die Zinn-Leuchtprobe mit SnH4 und muss vorher abgetrennt werden?",
-    "answer": "Nitrat; als starkes Oxidationsmittel verhindert es die Bildung von SnH4.",
-    "tags": [
-      "Gezielte Wiederholung"
-    ],
-    "priority": 2,
-    "note": ""
-  },
-  {
-    "id": 30177,
-    "sourceNo": 177,
-    "q": "Formuliere die Wiederausfällung von AgCl aus [Ag(NH3)2]+ durch Zugabe von H+ und Cl−.",
-    "answer": "[Ag(NH3)2]+ + Cl− + 2 H+ → AgCl + 2 NH4+",
-    "tags": [
-      "Reaktionsgleichung",
-      "Gezielte Wiederholung"
-    ],
-    "priority": 2,
-    "note": ""
-  },
-  {
-    "id": 30180,
-    "sourceNo": 180,
-    "q": "Welche Fehlerquelle besteht beim Cu2+-Nachweis mit überschüssigem NH3, wenn Ni2+ nicht sauber abgetrennt wurde?",
-    "answer": "Ni2+ bildet ebenfalls einen intensiv gefärbten Amminkomplex; dessen violett-blaue Farbe kann mit dem tiefblauen Kupferkomplex verwechselt werden.",
-    "tags": [
-      "Gezielte Wiederholung"
-    ],
-    "priority": 2,
-    "note": ""
-  },
-  {
-    "id": 30181,
-    "sourceNo": 181,
-    "q": "Formuliere die Bildung des tiefblauen Tetraamminkupfer(II)-Komplexes.",
-    "answer": "Cu2+ + 4 NH3 → [Cu(NH3)4]2+",
-    "tags": [
-      "Reaktionsgleichung"
-    ],
-    "priority": 1,
-    "note": ""
-  },
-  {
-    "id": 30183,
-    "sourceNo": 183,
-    "q": "Welche Beobachtung zeigt den positiven Antimon-Nachweis mit Molybdophosphorsäure auf Filterpapier?",
-    "answer": "Ein intensiv tiefblauer Fleck.",
-    "tags": [
-      "Gezielte Wiederholung"
-    ],
-    "priority": 2,
-    "note": ""
-  },
-  {
-    "id": 30184,
-    "sourceNo": 184,
-    "q": "Formuliere die Zementierung von Sb3+ an einem Eisennagel.",
-    "answer": "2 Sb3+ + 3 Fe → 2 Sb + 3 Fe2+",
-    "tags": [
-      "Reaktionsgleichung"
-    ],
-    "priority": 1,
-    "note": ""
-  },
-  {
-    "id": 30187,
-    "sourceNo": 187,
-    "q": "Formuliere die Bildung von Berliner Blau aus Fe3+ und [Fe(CN)6]4−.",
-    "answer": "4 Fe3+ + 3 [Fe(CN)6]4− → Fe4[Fe(CN)6]3",
-    "tags": [
-      "Reaktionsgleichung"
-    ],
-    "priority": 1,
-    "note": ""
-  },
-  {
-    "id": 30190,
-    "sourceNo": 190,
-    "q": "Welches Kation kann den BaCrO4-Nachweis durch einen ebenfalls gelben Chromat-Niederschlag massiv stören?",
-    "answer": "Pb2+, weil PbCrO4 ebenfalls gelb und schwerlöslich ist.",
-    "tags": [
-      "Gezielte Wiederholung"
-    ],
-    "priority": 2,
-    "note": ""
-  },
-  {
-    "id": 30191,
-    "sourceNo": 191,
-    "q": "Formuliere die Komplexbildung von Ni2+ mit Dimethylglyoxim im schwach ammoniakalischen Medium.",
-    "answer": "Ni2+ + 2 HDMG + 2 NH3 → [Ni(DMG)2] + 2 NH4+",
-    "tags": [
-      "Reaktionsgleichung",
-      "Auswendig lernen"
-    ],
-    "priority": 3,
-    "note": ""
-  },
-  {
-    "id": 30195,
-    "sourceNo": 195,
-    "q": "Formuliere die Oxidationsschmelze von MnO mit Nitrat im Carbonat-Medium zu Manganat(VI).",
-    "answer": "MnO + 2 NO3− + CO3^2− → MnO4^2− + 2 NO2− + CO2",
-    "tags": [
-      "Reaktionsgleichung"
-    ],
-    "priority": 1,
-    "note": ""
-  },
-  {
-    "id": 30199,
-    "sourceNo": 199,
-    "q": "Formuliere den ersten Schritt der Lunges-Reagenz-Farbreaktion: Diazotierung von R-NH2 mit Nitrit im Sauren.",
-    "answer": "R-NH2 + NO2− + 2 H+ → [R-N=N]+ + 2 H2O",
-    "tags": [
-      "Reaktionsgleichung"
-    ],
-    "priority": 1,
-    "note": ""
-  },
-  {
-    "id": 30204,
-    "sourceNo": 204,
-    "q": "Formuliere die saure Zersetzung von Thiosulfat, bei der Schwefel und SO2 entstehen.",
-    "answer": "S2O3^2− + 2 H+ → S + SO2 + H2O",
-    "tags": [
-      "Reaktionsgleichung",
-      "Gezielte Wiederholung"
-    ],
-    "priority": 2,
-    "note": ""
-  },
-  {
-    "id": 30205,
-    "sourceNo": 205,
-    "q": "Formuliere die Trübungsreaktion von CO2 in Barytwasser.",
-    "answer": "CO2 + Ba(OH)2 → BaCO3(s) + H2O",
-    "tags": [
-      "Reaktionsgleichung"
-    ],
-    "priority": 1,
     "note": ""
   }
 ];
