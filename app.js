@@ -11,7 +11,7 @@ const result = document.querySelector('#result');
 const resetBtn = document.querySelector('#reset');
 
 function freshState(mode='full'){
-  return {order:[],i:0,answers:{},hints:{},flags:{},revealed:{},mode,seed:Math.floor(Math.random()*0x7fffffff)};
+  return {order:[],i:0,frontier:0,answers:{},hints:{},flags:{},revealed:{},mode,seed:Math.floor(Math.random()*0x7fffffff)};
 }
 
 function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
@@ -56,7 +56,13 @@ function loadType(type){
   LS=storageKey(type);
   LAST_REPORT=reportKey(type);
   try{S=JSON.parse(localStorage.getItem(LS)||'null')||freshState()}catch{S=freshState()}
-  S.answers||={};S.hints||={};S.flags||={};S.revealed||={};S.order||=[];S.i||=0;S.mode||='full';S.seed||=Math.floor(Math.random()*0x7fffffff);
+  S.answers||={};S.hints||={};S.flags||={};S.revealed||={};S.order||=[];S.i=Number.isInteger(S.i)?S.i:0;S.mode||='full';S.seed||=Math.floor(Math.random()*0x7fffffff);
+  if(!Number.isInteger(S.frontier)){
+    const currentId=S.order[S.i];
+    S.frontier=Math.min(S.order.length,S.i+(currentId&&S.answers[currentId]?1:0));
+  }
+  S.frontier=Math.max(0,Math.min(S.frontier,S.order.length));
+  S.i=Math.max(0,Math.min(S.i,Math.max(0,S.order.length-1)));
   chooser.classList.add('hidden');
   resetBtn.classList.remove('hidden');
   syncQuestionPool();
@@ -75,6 +81,43 @@ function syncQuestionPool(){
 }
 
 function currentSet(){return S.order.map(id=>Q.find(q=>q.id===id)).filter(Boolean)}
+
+function markFrontierAfterAnswer(){
+  S.frontier=Math.max(S.frontier,S.i+1);
+}
+
+function goBackInSession(){
+  if(S.i<=0)return;
+  S.i--;save();renderQ();
+}
+
+function goForwardInSession(){
+  if(S.i>=S.frontier)return;
+  S.i++;save();
+  if(S.i>=S.order.length)return results();
+  renderQ();
+}
+
+function jumpToCurrentQuestion(){
+  if(S.frontier>=S.order.length)return results();
+  S.i=S.frontier;save();renderQ();
+}
+
+function sessionNavHtml(){
+  const back=S.i>0?'<button class="ghost" id="navprev">← Zurück</button>':'';
+  const forward=S.i<S.frontier?'<button class="primary" id="navnext">Weiter →</button>':'';
+  const current=(S.i+1<S.frontier && S.frontier<S.order.length)?'<button class="secondary" id="navcurrent">Zur aktuellen Aufgabe</button>':'';
+  return back+forward+current;
+}
+
+function wireSessionNav(){
+  const prev=document.querySelector('#navprev');
+  const next=document.querySelector('#navnext');
+  const current=document.querySelector('#navcurrent');
+  if(prev)prev.onclick=goBackInSession;
+  if(next)next.onclick=goForwardInSession;
+  if(current)current.onclick=jumpToCurrentQuestion;
+}
 
 function answeredItems(){
   return Object.entries(S.answers).map(([id,a])=>({q:Q.find(x=>x.id===Number(id)),...a})).filter(x=>x.q);
@@ -118,7 +161,7 @@ function homeView(){
     const reactions=Q.filter(q=>q.tags?.includes('Reaktionsgleichung')).length;
     const marked=Q.filter(q=>q.priority>=2).length;
     const memorize=Q.filter(q=>q.tags?.includes('Auswendig lernen')).length;
-    const canResume=S.order.length&&S.i<S.order.length;
+    const canResume=S.order.length&&S.frontier<S.order.length;
     home.innerHTML=`
       <div class="hero"><span class="topic">Fragentyp 3 · 207er Antestat</span><h2>Antestat-Fokustrainer</h2>
       <p class="muted">Originalformat aus dem 207er-Katalog: Multiple-Choice-Aufgaben bleiben Multiple Choice; offene Reaktionsgleichungen beantwortest du frei und deckst danach die Original-Lösung auf.</p></div>
@@ -136,7 +179,7 @@ function homeView(){
         ${done?'<button class="ghost" id="showres">Zwischenauswertung</button>':''}
         <button class="ghost" id="backtypes">Fragentyp wechseln</button>
       </div>`;
-    if(canResume)document.querySelector('#resume3').onclick=renderQ;
+    if(canResume)document.querySelector('#resume3').onclick=jumpToCurrentQuestion;
     document.querySelector('#mixed3').onclick=()=>startType3('mixed');
     document.querySelector('#marked3').onclick=()=>startType3('marked');
     document.querySelector('#reaction3').onclick=()=>startType3('reactions');
@@ -145,7 +188,7 @@ function homeView(){
     return;
   }
   const p1=Q.filter(x=>x.part==='Teil 1').length,p2=Q.filter(x=>x.part==='Teil 2').length;
-  const canResume=S.order.length&&S.i<S.order.length;
+  const canResume=S.order.length&&S.frontier<S.order.length;
   const title=ACTIVE_TYPE===1?'Gesamtdiagnose':'Folien-Detailtrainer';
   const description=ACTIVE_TYPE===1
     ?'Der ursprüngliche 117er-Test bleibt unverändert und mischt Grundlagen, Komplexchemie und Stoffchemie.'
@@ -180,7 +223,11 @@ function startType3(mode){
 
 function startFull(){
   if(!Q.length){alert('Für diesen Fragentyp sind noch keine Fragen hinterlegt.');return}
-  if(!S.order.length||S.i>=S.order.length||S.mode!=='full'){S=freshState('full');S.order=shuffle(Q.map(x=>x.id));save()}
+  if(!S.order.length||S.frontier>=S.order.length||S.mode!=='full'){
+    S=freshState('full');S.order=shuffle(Q.map(x=>x.id));save();
+  }else{
+    S.i=S.frontier;save();
+  }
   renderQ();
 }
 
