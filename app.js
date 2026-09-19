@@ -11,7 +11,7 @@ const result = document.querySelector('#result');
 const resetBtn = document.querySelector('#reset');
 
 function freshState(mode='full'){
-  return {order:[],i:0,frontier:0,answers:{},hints:{},flags:{},revealed:{},mode,seed:Math.floor(Math.random()*0x7fffffff)};
+  return {order:[],i:0,frontier:0,answers:{},hints:{},flags:{},revealed:{},mode,seed:Math.floor(Math.random()*0x7fffffff),catalogVersion:ACTIVE_TYPE===3?207:null};
 }
 
 function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
@@ -151,7 +151,7 @@ function chooserView(){
       </button>
       <button class="type-card" id="type3">
         <span class="type-label">Fragentyp 3</span>
-        <strong>Antestat-Fokustrainer</strong>
+        <strong>207er Antestat-Trainer</strong>
         <span>${t3} Originalaufgaben · Multiple Choice, Richtig/Falsch und Reaktionsgleichungen</span>
       </button>
     </div>`;
@@ -170,7 +170,7 @@ function homeView(){
     const marked=Q.filter(q=>q.priority>=2).length;
     const canResume=S.order.length&&S.frontier<S.order.length;
     home.innerHTML=`
-      <div class="hero"><span class="topic">Fragentyp 3 · 207er Antestat</span><h2>Antestat-Fokustrainer</h2>
+      <div class="hero"><span class="topic">Fragentyp 3 · 207er Antestat</span><h2>207er Antestat-Trainer</h2>
       <p class="muted">Alle 207 Originalaufgaben aus dem Antestat-Katalog. Du kannst sie gemischt oder nach Original-Aufgabentyp trainieren. Deine persönlich markierten Aufgaben bleiben zusätzlich als eigener Modus erhalten.</p></div>
       <div class="grid">
         <div class="stat"><strong>${Q.length}</strong>Aufgaben gesamt</div>
@@ -391,7 +391,7 @@ function resultsRecall(){
   const report=reportRecall(ans);
   if(ans.length)localStorage.setItem(LAST_REPORT,report);
   result.innerHTML=`
-    <h2>Auswertung · Antestat-Fokustrainer</h2>
+    <h2>Auswertung · 207er Antestat-Trainer</h2>
     <div class="grid">
       <div class="stat"><strong>${correct}/${ans.length}</strong>sicher richtig</div>
       <div class="stat"><strong>${pct}%</strong>sicher beherrscht</div>
