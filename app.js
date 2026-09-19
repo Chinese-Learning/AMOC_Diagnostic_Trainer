@@ -56,6 +56,12 @@ function loadType(type){
   LS=storageKey(type);
   LAST_REPORT=reportKey(type);
   try{S=JSON.parse(localStorage.getItem(LS)||'null')||freshState()}catch{S=freshState()}
+  if(type===3 && S.catalogVersion!==207){
+    const oldAnswers=S.answers||{};
+    S=freshState();
+    S.answers=oldAnswers;
+    S.catalogVersion=207;
+  }
   S.answers||={};S.hints||={};S.flags||={};S.revealed||={};S.order||=[];S.i=Number.isInteger(S.i)?S.i:0;S.mode||='full';S.seed||=Math.floor(Math.random()*0x7fffffff);
   if(!Number.isInteger(S.frontier)){
     const currentId=S.order[S.i];
@@ -146,7 +152,7 @@ function chooserView(){
       <button class="type-card" id="type3">
         <span class="type-label">Fragentyp 3</span>
         <strong>Antestat-Fokustrainer</strong>
-        <span>${t3} Aufgaben · deine Problemfragen plus alle Reaktionsgleichungen aus dem 207er-Katalog</span>
+        <span>${t3} Originalaufgaben · Multiple Choice, Richtig/Falsch und Reaktionsgleichungen</span>
       </button>
     </div>`;
   document.querySelector('#type1').onclick=()=>loadType(1);
@@ -158,31 +164,37 @@ function homeView(){
   chooser.classList.add('hidden');home.classList.remove('hidden');quiz.classList.add('hidden');result.classList.add('hidden');
   const done=Object.keys(S.answers).length;
   if(ACTIVE_TYPE===3){
-    const reactions=Q.filter(q=>q.tags?.includes('Reaktionsgleichung')).length;
+    const reactions=Q.filter(q=>q.kind==='reaction').length;
+    const mc=Q.filter(q=>q.kind==='mc').length;
+    const tf=Q.filter(q=>q.kind==='tf').length;
     const marked=Q.filter(q=>q.priority>=2).length;
-    const memorize=Q.filter(q=>q.tags?.includes('Auswendig lernen')).length;
     const canResume=S.order.length&&S.frontier<S.order.length;
     home.innerHTML=`
       <div class="hero"><span class="topic">Fragentyp 3 · 207er Antestat</span><h2>Antestat-Fokustrainer</h2>
-      <p class="muted">Originalformat aus dem 207er-Katalog: Multiple-Choice-Aufgaben bleiben Multiple Choice; offene Reaktionsgleichungen beantwortest du frei und deckst danach die Original-Lösung auf.</p></div>
+      <p class="muted">Alle 207 Originalaufgaben aus dem Antestat-Katalog. Du kannst sie gemischt oder nach Original-Aufgabentyp trainieren. Deine persönlich markierten Aufgaben bleiben zusätzlich als eigener Modus erhalten.</p></div>
       <div class="grid">
         <div class="stat"><strong>${Q.length}</strong>Aufgaben gesamt</div>
+        <div class="stat"><strong>${mc}</strong>Multiple Choice</div>
+        <div class="stat"><strong>${tf}</strong>Richtig/Falsch</div>
         <div class="stat"><strong>${reactions}</strong>Reaktionsgleichungen</div>
         <div class="stat"><strong>${marked}</strong>von dir markiert</div>
-        <div class="stat"><strong>${memorize}</strong>Auswendig lernen</div>
       </div>
       <div class="actions">
         ${canResume?'<button class="primary" id="resume3">Letzte Runde fortsetzen</button>':''}
-        <button class="secondary" id="mixed3">Neue gemischte Runde</button>
-        <button class="secondary" id="marked3">Nur deine markierten Aufgaben</button>
+        <button class="secondary" id="mixed3">Gemischte Runde · alle Aufgaben</button>
         <button class="secondary" id="reaction3">Nur Reaktionsgleichungen</button>
+        <button class="secondary" id="mc3">Nur Multiple Choice</button>
+        <button class="secondary" id="tf3">Nur Richtig/Falsch</button>
+        <button class="secondary" id="marked3">Meine markierten Aufgaben</button>
         ${done?'<button class="ghost" id="showres">Zwischenauswertung</button>':''}
         <button class="ghost" id="backtypes">Fragentyp wechseln</button>
       </div>`;
     if(canResume)document.querySelector('#resume3').onclick=jumpToCurrentQuestion;
     document.querySelector('#mixed3').onclick=()=>startType3('mixed');
-    document.querySelector('#marked3').onclick=()=>startType3('marked');
     document.querySelector('#reaction3').onclick=()=>startType3('reactions');
+    document.querySelector('#mc3').onclick=()=>startType3('mc');
+    document.querySelector('#tf3').onclick=()=>startType3('tf');
+    document.querySelector('#marked3').onclick=()=>startType3('marked');
     if(done)document.querySelector('#showres').onclick=results;
     document.querySelector('#backtypes').onclick=chooserView;
     return;
@@ -212,7 +224,9 @@ function homeView(){
 }
 
 function startType3(mode){
-  const pool=mode==='reactions'?Q.filter(q=>q.tags?.includes('Reaktionsgleichung'))
+  const pool=mode==='reactions'?Q.filter(q=>q.kind==='reaction')
+    :mode==='mc'?Q.filter(q=>q.kind==='mc')
+    :mode==='tf'?Q.filter(q=>q.kind==='tf')
     :mode==='marked'?Q.filter(q=>q.priority>=2)
     :Q;
   S=freshState(mode);
@@ -429,5 +443,30 @@ resetBtn.onclick=()=>{
   if(confirm(`Gespeicherten Fortschritt für Fragentyp ${ACTIVE_TYPE} löschen?`)){localStorage.removeItem(LS);S=freshState();homeView()}
 };
 
-migrateLegacyType1();
-chooserView();
+async function inflateType3Data(){
+  const chunks=window.AMOC_TYPE3_GZ||[];
+  if(!chunks.length){window.AMOC_TYPE3=[];return}
+  if(typeof DecompressionStream==='undefined')throw new Error('Dieser Browser unterstützt das Laden des 207er-Katalogs nicht.');
+  const all=[];
+  for(const b64 of chunks){
+    const bin=atob(b64);
+    const bytes=Uint8Array.from(bin,c=>c.charCodeAt(0));
+    const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+    const json=await new Response(stream).text();
+    all.push(...JSON.parse(json));
+  }
+  window.AMOC_TYPE3=all;
+}
+
+async function bootstrap(){
+  try{
+    await inflateType3Data();
+  }catch(err){
+    console.error(err);
+    window.AMOC_TYPE3=[];
+  }
+  migrateLegacyType1();
+  chooserView();
+}
+
+bootstrap();
